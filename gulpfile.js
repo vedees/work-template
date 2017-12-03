@@ -6,7 +6,7 @@ var 	gulp         =       require('gulp'),
 //Stylus files
 gulp.task('styles', function(){
 	return gulp
-	.src('./dev/stylus/**/*.styl')
+	.src('./dev/stylus/main.styl')
 	.pipe(stylus())
 	.pipe(gulp.dest('./build/static/css/'))
     .pipe(browserSync.stream())
@@ -15,7 +15,7 @@ gulp.task('styles', function(){
 //Pug files
 gulp.task('pug', function () {
 	return gulp
-	.src('./dev/pug/*.pug')
+	.src('./dev/pug/pages/*.pug')
  	.pipe(pug(
         {
             pretty: true
@@ -35,8 +35,8 @@ gulp.task('serve', function() {
 
 //Watch
 gulp.task('watch', function(){
-	gulp.watch('./dev/stylus/**/*.styl', ['styles']).on('change', browserSync.reload);
-	gulp.watch('./dev/pug/**/*.pug', ['pug']).on('change', browserSync.reload);
+	gulp.watch('./dev/stylus/**/*.styl', ['styles']);
+	gulp.watch('./dev/pug/**/*.pug', ['pug']);
 });
 
 
