@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Gulp for pug (html) and stylus (css) + browser-sync",
   "main": "index.js",
-  "dependencies": {
-    "browser-sync": "^2.18.13"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
     "gulp-pug": "^3.3.0",
     "gulp-stylus": "^2.6.0",
@@ -15,7 +14,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["pug","stylus","gulp","browser-sync"],
+  "keywords": [
+    "pug",
+    "stylus",
+    "gulp",
+    "browser-sync"
+  ],
   "author": "https://github.com/vedees",
   "license": "ISC"
 }
