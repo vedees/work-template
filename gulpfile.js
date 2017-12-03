@@ -4,7 +4,7 @@ var 	gulp     =      require('gulp'),
 
 gulp.task('style', function(){
 	return gulp
-	.src('./dev/styles/**/*.styl')    
+	.src('./dev/stylus/**/*.styl')    
 	.pipe (stylus()) 
 	.pipe (gulp.dest('./static/css/'))
 });
