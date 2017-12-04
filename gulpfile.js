@@ -9,26 +9,29 @@ gulp.task('styles', function(){
 	.src('./dev/stylus/main.styl')
 	.pipe(stylus())
 	.pipe(gulp.dest('./build/static/css/'))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.reload({stream: true}))
 });
 
 //Pug files
 gulp.task('pug', function () {
-	return gulp
-	.src('./dev/pug/pages/*.pug')
- 	.pipe(pug(
-        {
+    return gulp
+    .src('./dev/pug/pages/*.pug')
+    .pipe(pug({
             pretty: true
         }
     ))
- 	.pipe(gulp.dest('./build/'))
+    .pipe(gulp.dest('./build/'))
+    .pipe(browserSync.reload({stream: true}))
+
 });
 
 
 //Server
 gulp.task('serve', function() {
-    browserSync.init({
-        server: "./build",
+    browserSync({
+        server:{
+            baseDir: 'build'
+        },
         notify: false
     })
 });
