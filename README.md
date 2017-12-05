@@ -14,13 +14,16 @@ The template uses a Styl with Stylus syntax and project structure with source co
 To install simply do the following:
 
 ```bash
-git clone https://github.com/vedees/word-template word-template
+git clone https://github.com/vedees/work-template work-template
 ```
 
 ```bash
-cd gulpForPugStylus
+cd work-template
 ```
 
 ```bash
 npm i
+```
+```bash
+gulp
 ```
