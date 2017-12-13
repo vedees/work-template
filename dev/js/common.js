@@ -1,2 +1,2 @@
-console.log('hi')
-console.log('I`am js')
+console.log('hi');
+console.log('I`am js');

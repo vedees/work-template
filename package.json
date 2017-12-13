@@ -1,31 +1,49 @@
 {
-  "name": "gulpForPugStylus",
+  "name": "work-template",
   "version": "1.0.0",
-  "description": "Gulp for pug (html) and stylus (css) + browser-sync",
+  "description": "My Work Template",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
+    "beepbeep": "^1.2.1",
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-cssnano": "^2.1.2",
+    "gulp-jshint": "^2.0.4",
+    "gulp-notify": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-pug": "^3.3.0",
-    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.1",
     "gulp-stylus": "^2.6.0",
+    "gulp-tinypng": "^1.0.2",
     "gulp-uglifyjs": "^0.6.2",
+    "gulp-util": "^3.0.8",
     "jquery": "^3.2.1",
-    "normalize.css": "^7.0.0"
+    "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1",
+    "normalize.css": "^7.0.0",
+    "vinyl-ftp": "^0.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vedees/work-template"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "pug",
-    "stylus",
     "gulp",
+    "pug",
+    "html",
+    "stylus",
+    "css",
+    "js",
+    "nodejs",
     "browser-sync"
   ],
   "author": "https://github.com/vedees",
-  "license": "ISC"
+  "license": "MIT"
 }
