@@ -12,6 +12,7 @@ var     gulp         =       require('gulp'),
         cssnano      =       require('gulp-cssnano'),
         autoprefixer =       require('gulp-autoprefixer'),
         browserSync  =       require('browser-sync'),
+        cache        =       require('gulp-cache'),
         gutil        =       require('gulp-util'),
         ftp          =       require('vinyl-ftp'),
         del          =       require('del');
@@ -170,11 +171,14 @@ gulp.task('watch', function(){
 });
 
 
-//Main gulp task
+//MAIN TASK
+
 //gulp
 gulp.task('default', ['clean','style:dev','script:dev','pug','fonts','img:dev','other','serve','watch']);
+
 //build
 gulp.task('build', ['clean','style:build','script:build','pug','fonts','img:build','other']);
+
 //deploy
 gulp.task('deploy', function() {
     var conn = ftp.create({
@@ -192,8 +196,14 @@ gulp.task('deploy', function() {
         .pipe(conn.dest('/server/folder'));
 });
 
+//Cache
+gulp.task('cache', function() {
+    return cache.clearAll();
+});
 
-//Other settings
+
+//OTHER
+
 //Error Message
 var onError = function(err) {
     notify.onError({

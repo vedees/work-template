@@ -1,13 +1,13 @@
+@import 'utils/mixin.styl'
+@import 'utils/vars.styl'
+@import 'utils/fonts.styl'
 @import 'libs.styl'
-@import '_help/mixin.styl'
-@import '_help/vars.styl'
-@import '_help/fonts.styl'
 
 //Settings
 html
 	line-height 1.4
-	font-size 18px
-	color #000
+	font-size mainFontSize
+	color htmlColor
 
 body
 	font-family mainFont
@@ -68,15 +68,29 @@ button
 	flex-direction column
 	flex 1
 
-//---Global styl
-@import 'global/*.styl'
 
-//---Modules
+//GLOBAL STYL
+
+//Title
+@import 'global/titles.styl'
+
+//Buttons
+@import 'global/buttons.styl'
+
+//Forms
+@import 'global/forms.styl'
+
+
+//MODULES
+
 //Header
 @import 'modules/header.styl'
 
 //Footer
 @import 'modules/footer.styl'
 
-//Pages
+
+//PAGES
+
+//Index
 @import 'pages/index.styl'
