@@ -22,5 +22,7 @@ The template uses a Styl with Stylus syntax and project structure with source co
 	<li>git clone https://github.com/vedees/work-template work-template</li>
 	<li>cd work-template</li>
 	<li>npm i</li>
-  <li>gulp</li>
+ 	<li>gulp</li>
 </ol>
+<u>If there is an error 'Cannot GET /' - refresh the page (F5)</u>
+

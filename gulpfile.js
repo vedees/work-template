@@ -45,6 +45,7 @@ gulp.task('style:dev', function(){
         .pipe(sourcemaps.init())
         .pipe(plumber({ errorHandler: onError }))
         .pipe(stylus({
+            //Libs is 'devFolder' +'/sylus/libs.styl'
             'include css': true
         }))
         .pipe(autoprefixer({
@@ -74,14 +75,24 @@ gulp.task('style:build', function(){
 //JS Develop
 gulp.task('script:dev', function() {
     return gulp
+
+        //Libs here
         .src([
             './node_modules/jquery/dist/jquery.min.js',
-            // './YOU_PATH/anotherLib.js',
+         // './YOU_PATH/anotherLib.js',
             './dev/js/common.js'
         ])
         .pipe(plumber())
+
+        /* 
+        Jshint - detects errors and potential problems in JavaScript code.
+        Errors are output in the console with syntax highlighting.
+        You can add a list of ignored files on - .jshintignore (file is hidden)
+        Also, you can comment on 2 lines below if you dont need jshint.
+        */
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish', {beep: true}))
+        
         .pipe(concat('main.js'))
         .pipe(gulp.dest(config.buildFolder +config.secondBuildFolder +'/js'))
         .pipe(browserSync.reload({stream: true}))
@@ -90,14 +101,24 @@ gulp.task('script:dev', function() {
 //JS Build
 gulp.task('script:build', function() {
     return gulp
+
+        //Libs here
         .src([
             './node_modules/jquery/dist/jquery.min.js',
-            // './YOU_PATH/anotherLib.js',
+         // './YOU_PATH/anotherLib.js',
             config.devFolder +'/js/common.js'
         ])
         .pipe(plumber())
+
+        /* 
+        Jshint - detects errors and potential problems in JavaScript code.
+        Errors are output in the console with syntax highlighting.
+        You can add a list of ignored files on - .jshintignore (file is hidden)
+        Also, you can comment on 2 lines below if you dont need jshint.
+        */
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
+        
         .pipe(concat('main.js'))
         .pipe(uglify())
         .pipe(gulp.dest(config.buildFolder +config.secondBuildFolder +'/js'))
@@ -107,7 +128,7 @@ gulp.task('script:build', function() {
 //Img Develop
 gulp.task('img:dev', function() {
     return gulp
-        .src(config.devFolder +'/img/**/*.{jpg,gif,png,svg}')
+        .src(config.devFolder +'/img/**/*.{jpg,gif,png,svg,ico}')
         .pipe(gulp.dest(config.buildFolder +config.secondBuildFolder +'/img'));
 
 });
@@ -115,9 +136,11 @@ gulp.task('img:dev', function() {
 //Img Build
 gulp.task('img:build', function() {
     return gulp
-        .src(config.devFolder +'/img/**/*.{jpg,gif,png,svg}')
-        //Go to https://tinypng.com/developers
-        //Replace 'YOU_API_KEY' in your API
+        .src(config.devFolder +'/img/**/*.{jpg,gif,png,svg,ico}')
+        /* 
+        Go to https://tinypng.com/developers
+        Replace 'YOU_API_KEY' in your API
+        */
         .pipe(tinypng('YOU_API_KEY'))
         .pipe(gulp.dest(config.buildFolder +config.secondBuildFolder +'/img'));
 
@@ -201,8 +224,6 @@ gulp.task('cache', function() {
     return cache.clearAll();
 });
 
-
-//OTHER
 
 //Error Message
 var onError = function(err) {
