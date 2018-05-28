@@ -4,7 +4,6 @@ var     gulp         =       require('gulp'),
         tinypng      =       require('gulp-tinypng'),
         plumber      =       require('gulp-plumber'),
         notify       =       require('gulp-notify'),
-        beep         =       require('beepbeep'),
         concat       =       require('gulp-concat'),
         uglify       =       require('gulp-uglifyjs'),
         jshint       =       require('gulp-jshint'),
@@ -24,7 +23,7 @@ var config = {
 };
 
 
-//Pug files
+//Pug
 gulp.task('pug', function () {
     return gulp
         .src(config.devFolder +'/pug/pages/*.pug')
@@ -38,17 +37,18 @@ gulp.task('pug', function () {
 });
 
 
-//Stylus Develop
+//Stylus Dev
 gulp.task('style:dev', function(){
     return gulp
         .src(config.devFolder +'/stylus/main.styl')
         .pipe(sourcemaps.init())
         .pipe(plumber({ errorHandler: onError }))
         .pipe(stylus({
-            //Libs is 'devFolder' +'/sylus/libs.styl'
+            //Libs include here - 'devFolder' +'/sylus/libs.styl'
             'include css': true
         }))
         .pipe(autoprefixer({
+            //3v for Flex-box
             browsers: ['last 3 version']
         }))
         .pipe(sourcemaps.write('.'))
@@ -72,15 +72,16 @@ gulp.task('style:build', function(){
 });
 
 
-//JS Develop
+//JS Dev
 gulp.task('script:dev', function() {
     return gulp
 
-        //Libs here
+        //Libs here:
         .src([
-            './node_modules/jquery/dist/jquery.min.js',
-         // './YOU_PATH/anotherLib.js',
-            './dev/js/common.js'
+         // EXAMPLE:
+         // './node_modules/jquery/dist/jquery.min.js',
+            config.devFolder +'/js/libs/*.js',
+            config.devFolder +'/js/common.js'
         ])
         .pipe(plumber())
 
@@ -91,7 +92,7 @@ gulp.task('script:dev', function() {
         Also, you can comment on 2 lines below if you dont need jshint.
         */
         .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish', {beep: true}))
+        .pipe(jshint.reporter('jshint-stylish'))
         
         .pipe(concat('main.js'))
         .pipe(gulp.dest(config.buildFolder +config.secondBuildFolder +'/js'))
@@ -102,10 +103,11 @@ gulp.task('script:dev', function() {
 gulp.task('script:build', function() {
     return gulp
 
-        //Libs here
+        //Libs here:
         .src([
-            './node_modules/jquery/dist/jquery.min.js',
-         // './YOU_PATH/anotherLib.js',
+         // EXAMPLE:
+         // './node_modules/jquery/dist/jquery.min.js',
+            config.devFolder +'/js/libs/*.js',
             config.devFolder +'/js/common.js'
         ])
         .pipe(plumber())
@@ -137,6 +139,7 @@ gulp.task('img:dev', function() {
 gulp.task('img:build', function() {
     return gulp
         .src(config.devFolder +'/img/**/*.{jpg,gif,png,svg,ico}')
+
         /* 
         Go to https://tinypng.com/developers
         Replace 'YOU_API_KEY' in your API
@@ -168,20 +171,9 @@ gulp.task('other', function() {
 });
 
 
-//Clean /build
+//Clean buildFolder
 gulp.task('clean', function() {
     return del.sync(config.buildFolder)
-});
-
-
-//Server
-gulp.task('serve', function() {
-    browserSync({
-        server:{
-            baseDir: config.buildFolder
-        },
-        notify: false
-    })
 });
 
 
@@ -194,10 +186,23 @@ gulp.task('watch', function(){
 });
 
 
+//Server
+gulp.task('serve', function() {
+    browserSync({
+        server:{
+            baseDir: config.buildFolder
+        },
+        // port: 8080,
+        // open: true,
+        notify: false
+    })
+});
+
+
 //MAIN TASK
 
 //gulp
-gulp.task('default', ['clean','style:dev','script:dev','pug','fonts','img:dev','other','serve','watch']);
+gulp.task('default', ['clean','pug','style:dev','script:dev','fonts','img:dev','other','watch','serve']);
 
 //build
 gulp.task('build', ['clean','style:build','script:build','pug','fonts','img:build','other']);
@@ -219,7 +224,7 @@ gulp.task('deploy', function() {
         .pipe(conn.dest('/server/folder'));
 });
 
-//Cache
+//cache
 gulp.task('cache', function() {
     return cache.clearAll();
 });
@@ -231,6 +236,5 @@ var onError = function(err) {
         title:    "Error in " + err.plugin,
         message: err.message
     })(err);
-    beep(2);
     this.emit('end');
 };
